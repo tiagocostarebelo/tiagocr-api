@@ -54,7 +54,7 @@ db.prepare(`
   VALUES (?, ?, ?, ?, ?, ?, ?)
 `).run(token, name, email, type, prefill, now, expiresAt);
 
-// ── Output ────────────────────────────────────────────────────────────────────
+// OUTPUT //
 
 const expiryDate = new Date(expiresAt).toLocaleDateString('en-GB', {
     day: 'numeric', month: 'long', year: 'numeric'

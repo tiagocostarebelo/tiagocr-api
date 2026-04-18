@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-// import briefRouter from './routes/brief.js';
+import briefRouter from './routes/brief.js';
 import './db.js';
 
 dotenv.config();
@@ -21,7 +21,7 @@ app.use(express.static('public'));
 
 // ROUTES //
 
-// app.use('/brief', briefRouter);
+app.use('/brief', briefRouter);
 
 // CHECK //
 
