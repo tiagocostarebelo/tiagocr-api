@@ -139,4 +139,51 @@ router.post('/:token/submit', async (req, res) => {
     }
 });
 
+
+router.post('/admin/generate', async (req, res) => {
+    const secret = req.headers['x-admin-secret'];
+
+    if (!secret || secret !== process.env.ADMIN_SECRET) {
+        return res.status(401).json({ error: 'Unauthorised.' });
+    }
+
+    const { name, email, type, business, description } = req.body;
+
+    const errors = [];
+    if (!name) errors.push('name is required');
+    if (!email) errors.push('email is required');
+    if (!type) errors.push('type is required');
+    if (type && !['brand', 'web', 'both'].includes(type)) errors.push('type must be brand, web, or both');
+
+    if (errors.length) {
+        return res.status(400).json({ errors });
+    }
+
+    const { randomBytes } = await import('crypto');
+    const token = randomBytes(16).toString('hex');
+    const now = Date.now();
+    const expiresAt = now + (parseInt(process.env.TOKEN_EXPIRY_DAYS) || 14) * 24 * 60 * 60 * 1000;
+
+    const prefill = JSON.stringify({
+        business: business || '',
+        description: description || '',
+    });
+
+    db.prepare(`
+    INSERT INTO tokens (token, client_name, client_email, project_type, prefill, created_at, expires_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `).run(token, name, email, type, prefill, now, expiresAt);
+
+    const expiryDate = new Date(expiresAt).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric'
+    });
+
+    res.json({
+        client: name,
+        type,
+        expires: expiryDate,
+        url: `${process.env.BASE_URL}/brief/${token}`,
+    });
+});
+
 export default router;
