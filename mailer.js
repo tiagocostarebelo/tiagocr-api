@@ -1,35 +1,29 @@
-import nodemailer from 'nodemailer';
+// mailer.js
+import { Resend } from 'resend';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.zoho.eu',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.ZOHO_USER,
-    pass: process.env.ZOHO_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendBriefEmail = async ({ clientName, projectType, answers }) => {
   const sections = formatAnswers(answers);
 
-  await transporter.sendMail({
-    from: `"TiagoCR" <${process.env.ZOHO_USER}>`,
+  await resend.emails.send({
+    from: 'TiagoCR <tiago@tiagocr.me>',
     to: process.env.ZOHO_USER,
-    subject: `New Brief - ${clientName} (${projectType})`,
+    subject: `New Brief — ${clientName} (${projectType})`,
     text: plainText({ clientName, projectType, sections }),
     html: htmlEmail({ clientName, projectType, sections }),
   });
 };
 
+// ── Formatters ────────────────────────────────────────────────────────────────
 
 const formatAnswers = (answers) => {
   return Object.entries(answers).map(([question, answer]) => ({
     question,
-    answer: answer?.trim() || '-',
+    answer: answer?.trim() || '—',
   }));
 };
 
@@ -58,7 +52,7 @@ const htmlEmail = ({ clientName, projectType, sections }) => {
       </td>
       <td style="padding:12px 16px;border-bottom:1px solid #eee;color:#444;
                  vertical-align:top;font-family:Arial,sans-serif;font-size:13px;
-                 white-space:pre-wrap; ">
+                 white-space:pre-wrap;">
         ${answer}
       </td>
     </tr>
@@ -71,8 +65,8 @@ const htmlEmail = ({ clientName, projectType, sections }) => {
       <table style="max-width:700px;margin:0 auto;background:#fff;
                     border-radius:4px;overflow:hidden;">
         <tr>
-          <td style="background:#1a1a1a;padding:24px 32px;">
-            <span style="color:#C9A84C;font-size:11px;
+          <td style="background:#11111D;padding:24px 32px;">
+            <span style="color:#F0B90B;font-size:11px;
                          letter-spacing:2px;text-transform:uppercase;">
               New Brief Submission
             </span>
