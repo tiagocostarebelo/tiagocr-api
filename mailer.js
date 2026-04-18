@@ -4,52 +4,52 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.zoho.eu',
-    port: 465,
-    secure: true,
-    auth: {
-        user: process.env.ZOHO_USER,
-        pass: process.env.ZOHO_PASS,
-    },
+  host: 'smtp.zoho.eu',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.ZOHO_USER,
+    pass: process.env.ZOHO_PASS,
+  },
 });
 
 export const sendBriefEmail = async ({ clientName, projectType, answers }) => {
-    const sections = formatAnswers(answers);
+  const sections = formatAnswers(answers);
 
-    await transporter.sendMail({
-        from: `"TiagoCR" <${process.env.ZOHO_USER}>`,
-        to: process.env.ZOHO_USER,
-        subject: `New Brief - ${clientName} (${projectType})`,
-        text: plainText({ clientName, projectType, sections }),
-        html: htmlEmail({ clientName, projectType, sections }),
-    });
+  await transporter.sendMail({
+    from: `"TiagoCR" <${process.env.ZOHO_USER}>`,
+    to: process.env.ZOHO_USER,
+    subject: `New Brief - ${clientName} (${projectType})`,
+    text: plainText({ clientName, projectType, sections }),
+    html: htmlEmail({ clientName, projectType, sections }),
+  });
 };
 
 
 const formatAnswers = (answers) => {
-    return Object.entries(answers).map(([question, answer]) => ({
-        question,
-        answer: answer?.trim() || '-',
-    }));
+  return Object.entries(answers).map(([question, answer]) => ({
+    question,
+    answer: answer?.trim() || '-',
+  }));
 };
 
 const plainText = ({ clientName, projectType, sections }) => {
-    const lines = [
-        `NEW BRIEF SUBMISSION`,
-        `Client: ${clientName}`,
-        `Project type: ${projectType}`,
-        `Submitted: ${new Date().toLocaleString('en-GB')}`,
-        ``,
-        `─────────────────────────────────────────`,
-        ``,
-        ...sections.flatMap(({ question, answer }) => [question, answer, ``]),
-    ];
+  const lines = [
+    `NEW BRIEF SUBMISSION`,
+    `Client: ${clientName}`,
+    `Project type: ${projectType}`,
+    `Submitted: ${new Date().toLocaleString('en-GB')}`,
+    ``,
+    `─────────────────────────────────────────`,
+    ``,
+    ...sections.flatMap(({ question, answer }) => [question, answer, ``]),
+  ];
 
-    return lines.join('\n');
+  return lines.join('\n');
 };
 
 const htmlEmail = ({ clientName, projectType, sections }) => {
-    const rows = sections.map(({ question, answer }) => `
+  const rows = sections.map(({ question, answer }) => `
     <tr>
       <td style="padding:12px 16px;border-bottom:1px solid #eee;font-weight:600;
                  color:#1a1a1a;vertical-align:top;width:35%;font-family:Arial,sans-serif;
@@ -64,7 +64,7 @@ const htmlEmail = ({ clientName, projectType, sections }) => {
     </tr>
   `).join('');
 
-    return `
+  return `
     <!DOCTYPE html>
     <html>
     <body style="margin:0;padding:32px;background:#f5f5f5;font-family:Arial,sans-serif;">
