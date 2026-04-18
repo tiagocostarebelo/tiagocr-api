@@ -1,13 +1,1072 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>TiagoCR — Brief</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiagoCR | Client Brief</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;900&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #11111D;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --border-focus: #64CBC9;
+            --text: #FFFFFF;
+            --text-muted: rgba(255, 255, 255, 0.55);
+            --mustard: #F0B90B;
+            --teal: #64CBC9;
+            --error: #ff6b6b;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --radius: 4px;
+            --max-width: 720px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 1rem;
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Layout ── */
+        .wrapper {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px 96px;
+        }
+
+        /* ── Header ── */
+        .brief-header {
+            padding: 64px 0 48px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 64px;
+        }
+
+        .wordmark {
+            display: block;
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--mustard);
+            margin-bottom: 32px;
+        }
+
+        .brief-header h1 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(2.25rem, 5vw, 3rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .brief-header .greeting {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 1rem;
+            color: var(--mustard);
+            margin-bottom: 24px;
+            min-height: 1.5em;
+        }
+
+        .brief-header .intro {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            line-height: 1.75;
+        }
+
+        .brief-header .intro+.intro {
+            margin-top: 12px;
+        }
+
+        /* ── Section ── */
+        .section {
+            margin-bottom: 72px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.625rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--mustard);
+            white-space: nowrap;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.375rem, 3vw, 1.75rem);
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        /* ── Question ── */
+        .question {
+            margin-bottom: 48px;
+        }
+
+        .question-meta {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        .question-num {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.625rem;
+            letter-spacing: 0.2em;
+            color: var(--mustard);
+            min-width: 22px;
+            flex-shrink: 0;
+            padding-top: 3px;
+        }
+
+        .question-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.35;
+            cursor: default;
+        }
+
+        .question-hint {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin: 0 0 14px 36px;
+        }
+
+        /* Example toggle */
+        details.example {
+            margin: 0 0 14px 36px;
+        }
+
+        details.example summary {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.8125rem;
+            color: var(--teal);
+            cursor: pointer;
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            user-select: none;
+            opacity: 0.85;
+            transition: opacity 0.15s;
+        }
+
+        details.example summary:hover {
+            opacity: 1;
+        }
+
+        details.example summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details.example summary::after {
+            content: '↓';
+            font-size: 0.75rem;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        details[open].example summary::after {
+            transform: rotate(180deg);
+        }
+
+        details.example .example-body {
+            margin-top: 10px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid rgba(240, 185, 11, 0.4);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.65;
+        }
+
+        /* Field wrapper */
+        .field {
+            margin-left: 36px;
+        }
+
+        .prefill-note {
+            font-size: 0.75rem;
+            color: var(--teal);
+            font-style: italic;
+            margin-bottom: 8px;
+            opacity: 0.85;
+        }
+
+        /* Inputs */
+        input[type="text"],
+        textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            color: var(--text);
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            transition: border-color 0.2s, background 0.2s;
+            resize: vertical;
+            appearance: none;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        input[type="text"].error,
+        textarea.error {
+            border-color: var(--error);
+        }
+
+        input[type="text"]::placeholder,
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        textarea {
+            min-height: 130px;
+        }
+
+        /* ── Submit section ── */
+        .submit-section {
+            margin-top: 64px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .submit-note {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.65;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 18px 32px;
+            background: var(--mustard);
+            color: #11111D;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.875rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            opacity: 0.88;
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .submit-error {
+            display: none;
+            margin-top: 16px;
+            font-size: 0.8125rem;
+            color: var(--error);
+            line-height: 1.5;
+        }
+
+        /* ── Thank you state ── */
+        #thankyou {
+            display: none;
+            text-align: center;
+            padding: 120px 24px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .ty-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.625rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--mustard);
+            margin-bottom: 24px;
+        }
+
+        #thankyou h2 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: clamp(2rem, 5vw, 3rem);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        #thankyou p {
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+            line-height: 1.75;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .wrapper {
+                padding: 0 16px 64px;
+            }
+
+            .brief-header {
+                padding: 40px 0 32px;
+                margin-bottom: 40px;
+            }
+
+            .question-hint,
+            details.example,
+            .field {
+                margin-left: 0;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <p>Form coming soon.</p>
+
+    <!-- ── Thank you (hidden until submission) ───────────────────────────────── -->
+    <div id="thankyou">
+        <div class="ty-label">Brief received</div>
+        <h2>Thank you,<br><span id="ty-name"></span>.</h2>
+        <p>I'll review your brief and be back in touch within 1–2 working days.</p>
+    </div>
+
+    <!-- ── Form ─────────────────────────────────────────────────────────────── -->
+    <div id="form-wrapper">
+        <div class="wrapper">
+
+            <header class="brief-header">
+                <span class="wordmark">TiagoCR</span>
+                <h1>Your Project Brief</h1>
+                <p class="greeting" id="greeting"></p>
+                <p class="intro">To work out whether we're a good fit, I need to understand your business properly.
+                    These questions cover your foundations, your audience, and your direction - the things that shape
+                    every design decision I make.</p>
+                <p class="intro">There are no right or wrong answers, just be honest and specific.</p>
+            </header>
+
+            <form id="brief-form" novalidate>
+
+                <!-- PART A — FOUNDATIONS (always shown) -->
+                <section class="section" id="section-a">
+                    <div class="section-header">
+                        <span class="section-label">Part A</span>
+                        <h2 class="section-title">Foundations</h2>
+                    </div>
+
+                    <!-- Q1 — Business name -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q1">What is your brand or business name?</label>
+                        </div>
+                        <p class="question-hint">Is this the final name or still being decided? If undecided, share 3–10
+                            name ideas and any constraints, what it must feel like, words to avoid, how it should
+                            sound.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"The name isn't final yet. Current ideas: North & Willow, Willow
+                                Studio, Northfield Co. I want it to feel calm and premium, be easy to pronounce, and
+                                avoid anything too cute or overly trendy."</div>
+                        </details>
+                        <div class="field">
+                            <p class="prefill-note" id="q1-note" style="display:none;">Based on your enquiry. Feel free
+                                to update this.</p>
+                            <input type="text" id="q1" name="q1" placeholder="Your business name" required>
+                        </div>
+                    </div>
+
+                    <!-- Q2 — What the business does & origin -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q2">What does your business do, and what motivated you to
+                                start it?</label>
+                        </div>
+                        <p class="question-hint">Describe your business in plain terms, then tell me what drove you to
+                            start it. The origin often shapes the character, a personal frustration, a gap you spotted,
+                            or something you couldn't find elsewhere. That context helps me build something with a real
+                            foundation.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"I design ergonomic office furniture for people who work from
+                                home. I started after years of back pain from cheap chairs. I couldn't find anything
+                                well-designed and actually comfortable, so I built it myself."</div>
+                        </details>
+                        <div class="field">
+                            <p class="prefill-note" id="q2-note" style="display:none;">You mentioned this when you got
+                                in touch - feel free to expand.</p>
+                            <textarea id="q2" name="q2"
+                                placeholder="Describe your business and what motivated you to start it"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q3 — Services -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q3">What do you offer, and what do you not
+                                offer?</label>
+                        </div>
+                        <p class="question-hint">Describe what you sell or provide in plain language. Also include what
+                            you don't do, this keeps the brand focused and your message from becoming too broad. Both
+                            parts matter equally.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"I offer brand identity design, logo design, and brand guidelines
+                                for small businesses. I don't offer social media management or ongoing monthly marketing
+                                support."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q3" name="q3" placeholder="What you offer, and what you don't"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q4 — Ideal customer -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q4">Who is your ideal customer?</label>
+                        </div>
+                        <p class="question-hint">Picture your best-fit customer. What do they do, what matters to them,
+                            and what kind of lifestyle or business situation are they in? The more specific you are, the
+                            easier it is to design visuals that speak their language.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"My ideal customer is a consultant or small business
+                                owner, 30–45, who has been running their business for a few years but knows their brand
+                                hasn't kept up. They care about professionalism, they're not precious, and they're ready
+                                to invest properly."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q4" name="q4" placeholder="Describe your ideal customer in detail"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q5 — Problem + result -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q5">What problem do you solve, and what result do
+                                customers get?</label>
+                        </div>
+                        <p class="question-hint">Explain the problem your customer has today and the outcome they want.
+                            Keep it simple: what pain do you remove, and what do they gain? This becomes the backbone of
+                            your messaging.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"People feel overwhelmed and unsure how to build a cohesive brand.
+                                I give them a clear, professional identity that makes them feel confident and helps them
+                                look established from day one."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q5" name="q5" placeholder="The problem you solve and the result customers get"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q14 — Success + practical details -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q14">What does a successful outcome look like, and what
+                                are the practical constraints?</label>
+                        </div>
+                        <p class="question-hint">Cover three things: (1) What does success look like - what should the
+                            brand or site be doing for your business six months after launch? (2) When do you need this
+                            ready, and are there any fixed deadlines? (3) Who approves decisions - are you the only
+                            person, or does someone else need to sign off?</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"Success is a brand that feels premium and a website that gets
+                                enquiries weekly. I want to launch within 8 weeks. I'm the only decision-maker, no one
+                                else needs to sign off."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q14" name="q14"
+                                placeholder="Success definition, timeline, and who approves decisions"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q20 — Vision -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q20">Where do you want the business to be in 3–5
+                                years?</label>
+                        </div>
+                        <p class="question-hint">This shapes how scalable the identity and website should be. If you
+                            plan to expand services, build a product line, hire a team, or enter new markets, it's
+                            important to know now so we don't design something too small for the future.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"In five years I want to be a recognised name in my niche, expand
+                                into digital products, and potentially bring in one other person. I want the brand to
+                                feel established enough to grow into, not something I'll need to rebrand in two years."
+                            </div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q20" name="q20" placeholder="Your 3–5 year vision for the business"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q21 — Existing assets -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q21">Do you have any existing brand assets or inspiration
+                                to share?</label>
+                        </div>
+                        <p class="question-hint">If you already have anything, old logos, colours, fonts, moodboards,
+                            photos, copy, social links, or a domain, share them here. Even if you dislike your current
+                            branding, it's still useful as a reference point. Links preferred.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"I have a simple logo in PNG and brand colours I've been using on
+                                Instagram. My domain is already purchased. Here's a Pinterest board:
+                                pinterest.com/mybrand. I don't love my current logo but I'll share it as a starting
+                                reference."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q21" name="q21"
+                                placeholder="Links, descriptions, or notes on existing assets and inspiration"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                </section><!-- /section-a -->
+
+
+                <!-- ════════════════════════════════════════
+             PART B — BRAND IDENTITY (brand or both)
+        ════════════════════════════════════════ -->
+                <section class="section" id="section-b" style="display:none;">
+                    <div class="section-header">
+                        <span class="section-label">Part B</span>
+                        <h2 class="section-title">Brand Identity</h2>
+                    </div>
+
+                    <!-- Q6 — Values -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q6">What values guide how you run your business? (And if
+                                you genuinely support any causes, mention those too.)</label>
+                        </div>
+                        <p class="question-hint">Values define what the brand stands for beyond aesthetics. Causes are
+                            optional, only include them if they're real and consistent. Audiences spot performance
+                            causes instantly.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"My values are clarity, craftsmanship, and honesty. I don't have a
+                                formal cause, but I care about working sustainably — I take on fewer projects and do
+                                them properly rather than chasing volume."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q6" name="q6" placeholder="Your values, and any causes if relevant"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q7 — Core promise -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q7">What is your core promise, and what makes you
+                                different from alternatives?</label>
+                        </div>
+                        <p class="question-hint">This is your "why you" in one place. What do you promise customers, and
+                            why should they choose you over competitors or doing it themselves? Include 1–2 proof points
+                            if you have them - results, process, experience, guarantees.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"I help busy founders build a brand that feels premium and
+                                consistent, without endless back-and-forth. My process is structured, I deliver on time,
+                                and I provide clear guidelines so the brand stays consistent after we're done."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q7" name="q7" placeholder="Your promise and what sets you apart"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q8 — Brand character -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q8">How would you describe your brand's character, and
+                                what should it never feel like?</label>
+                        </div>
+                        <p class="question-hint">Give me 3–5 words that describe how your brand behaves and feels, then
+                            a few words that are completely wrong for you. This helps avoid design directions that look
+                            nice but don't match your identity.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"It is: calm, refined, modern, thoughtful, confident. It is not:
+                                playful, childish, loud, chaotic, aggressive."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q8" name="q8" placeholder="What the brand is, and what it is not"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q9 — Feelings -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q9">How do you want people to feel at first glance, and
+                                after they've worked with you?</label>
+                        </div>
+                        <p class="question-hint">Describe the immediate emotion your brand should create, and the deeper
+                            emotion customers should feel after the experience. These are often different, and both
+                            matter.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"At first glance: calm, impressed, curious. After working
+                                together: confident, supported, and proud to show it off."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q9" name="q9" placeholder="First impression and post-experience feeling"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q10 — Visual style -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q10">What visual style feels right, and what should be
+                                avoided?</label>
+                        </div>
+                        <p class="question-hint">Share references rather than guessing in the abstract. Links are best:
+                            brands, websites, Pinterest boards, Instagram accounts, packaging, typography, anything
+                            that represents the direction you like. Also share what you dislike so I can steer clear.
+                        </p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"I like the minimal, elegant feel of Aesop and the editorial
+                                typography of Kinfolk. Clean layout, strong type, lots of breathing space. I dislike
+                                overly playful logos, neon colours, and cluttered layouts."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q10" name="q10" placeholder="Visual references you like and things to avoid"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q11 — Where branding lives -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q11">Where will your logo and branding be used
+                                most?</label>
+                        </div>
+                        <p class="question-hint">The same logo behaves differently depending on where it needs to live.
+                            Tell me where your branding must work: website, favicon, social icon, packaging, signage,
+                            embroidery, invoices, etc. This helps me design the right formats and avoid issues at small
+                            sizes.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"Mostly on the website, Instagram profile icon, and packaging
+                                labels. It also needs to work as a small favicon and in one colour for stamps and
+                                invoices."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q11" name="q11" placeholder="Every context where the brand needs to work"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q15 — Competitors -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q15">Who are your competitors or alternatives, and what
+                                do you think of them?</label>
+                        </div>
+                        <p class="question-hint">Competitors aren't only direct competitors, they can be alternatives
+                            customers use instead: DIY tools, marketplaces, agencies, templates. What do you like or
+                            dislike about them? This helps position you clearly and avoid copying what's already common.
+                        </p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"My main competitors are two local brand studios. One looks
+                                premium but feels cold and impersonal. The other feels friendly but not polished enough.
+                                I want to be warm and human while still feeling high-end."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q15" name="q15" placeholder="Who competes with you and your read on them"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q16 — Tone of voice -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q16">What tone of voice should your brand have?</label>
+                        </div>
+                        <p class="question-hint">This is different from character (above). Character is how the brand
+                            feels. Tone is how it speaks, the words it chooses, the level of formality, the energy
+                            behind the writing. Think: friendly and casual, confident and expert, luxury and refined,
+                            calm and minimal.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"Confident, calm, and helpful, like a trusted guide. Not overly
+                                corporate, not overly casual, and never pushy."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q16" name="q16" placeholder="How the brand sounds when it speaks"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q17 — Pricing position -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q17">Where do you sit in pricing: affordable, mid-range,
+                                premium, or luxury?</label>
+                        </div>
+                        <p class="question-hint">Pricing affects design. A premium brand needs refinement, restraint,
+                            and clarity. An affordable brand needs warmth, accessibility, and legibility. Be honest —
+                            the design should match where you actually sit, not where you'd like to be.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"Premium but approachable. I'm not the cheapest option, but
+                                customers get high quality and a smooth experience. I don't want to look inaccessible,
+                                but I don't want to look budget either."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q17" name="q17"
+                                placeholder="Your pricing position and what that means for your brand"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                </section><!-- /section-b -->
+
+
+                <!-- ════════════════════════════════════════
+             PART C — WEB & DIGITAL (web or both)
+        ════════════════════════════════════════ -->
+                <section class="section" id="section-c" style="display:none;">
+                    <div class="section-header">
+                        <span class="section-label">Part C</span>
+                        <h2 class="section-title">Web &amp; Digital</h2>
+                    </div>
+
+                    <!-- Q12 — Website goal -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q12">What is the main goal of your website?</label>
+                        </div>
+                        <p class="question-hint">A website should have one clear job. Tell me the #1 goal: sell
+                            products, book calls, collect enquiries, grow an email list, educate, showcase work. Then
+                            tell me what you want visitors to do first when they land.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"The main goal is to get people to enquire and book a discovery
+                                call. Everything else is secondary to that one action."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q12" name="q12" placeholder="The primary goal of your website"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q13 — Pages + features -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q13">What pages does your site need, and are there any
+                                specific features required?</label>
+                        </div>
+                        <p class="question-hint">Think about what visitors need to trust you and take action. List the
+                            pages you want (Home, About, Services, Portfolio, Shop, Contact, FAQ, Blog) and any features
+                            (booking system, payments, newsletter signup, client portal, multi-language, etc.).</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"I need Home, About, Services, Portfolio, and Contact. I also want
+                                a newsletter signup and an enquiry form. No e-commerce for now."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q13" name="q13" placeholder="Pages needed and any specific features"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q18 — Customer experience -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q18">What kind of experience do you want customers to
+                                have?</label>
+                        </div>
+                        <p class="question-hint">Describe the service style: fast and efficient, personal and
+                            high-touch, self-service and simple, VIP and boutique. This influences everything from site
+                            structure to microcopy and how features are designed.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"A boutique experience, quick responses, very clear guidance, and
+                                a process that feels supportive and professional from start to finish."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q18" name="q18" placeholder="The experience you want customers to have"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Q19 — How customers find you -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q19">How do customers usually find you, or how do you
+                                want them to find you?</label>
+                        </div>
+                        <p class="question-hint">This helps design for the real world. If customers mostly come from
+                            Instagram, the site should be fast and scannable. If they come from Google, SEO structure
+                            matters more. If it's referrals, trust-building matters most.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"Right now mostly through Instagram and referrals. In the future I
+                                want to grow through Google search and Pinterest."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q19" name="q19"
+                                placeholder="How customers find you now and how you want them to" required></textarea>
+                        </div>
+                    </div>
+
+                </section><!-- /section-c -->
+
+                <!-- ── Submit ── -->
+                <div class="submit-section">
+                    <p class="submit-note">Once you submit, this link will no longer be active. Make sure your answers
+                        are complete before sending.</p>
+                    <button type="submit" class="btn-submit" id="btn-submit">Submit Brief</button>
+                    <p class="submit-error" id="submit-error"></p>
+                </div>
+
+            </form>
+        </div><!-- /.wrapper -->
+    </div><!-- /#form-wrapper -->
+
+    <script>
+        // ── Data injected by server ─────────────────────────────────────────────
+        const brief = window.__BRIEF__ || {};
+        const token = brief.token || '';
+        const type = brief.projectType || 'both';
+        const prefill = brief.prefill || {};
+        const clientName = brief.clientName || '';
+        const firstName = clientName.split(' ')[0];
+
+        // ── Greeting ────────────────────────────────────────────────────────────
+        if (firstName) {
+            document.getElementById('greeting').textContent =
+                `Hi ${firstName}, here's what I need from you before we move forward.`;
+            document.getElementById('ty-name').textContent = firstName;
+        }
+
+        // ── Show/hide sections ──────────────────────────────────────────────────
+        const showBrand = type === 'brand' || type === 'both';
+        const showWeb = type === 'web' || type === 'both';
+
+        if (showBrand) document.getElementById('section-b').style.display = '';
+        if (showWeb) document.getElementById('section-c').style.display = '';
+
+        // ── Number visible questions sequentially ───────────────────────────────
+        function renumber() {
+            let count = 0;
+            document.querySelectorAll('.question').forEach(q => {
+                const section = q.closest('section');
+                const hidden = section && section.style.display === 'none';
+                if (!hidden) {
+                    count++;
+                    q.querySelector('.question-num').textContent = String(count).padStart(2, '0');
+                }
+            });
+        }
+        renumber();
+
+        // ── Prefill ─────────────────────────────────────────────────────────────
+
+
+        if (prefill.business) {
+            document.getElementById('q1').value = prefill.business;
+            document.getElementById('q1-note').style.display = 'block';
+        }
+
+        if (prefill.description) {
+            document.getElementById('q2').value = prefill.description;
+            document.getElementById('q2-note').style.display = 'block';
+        }
+
+        // ── Submit ──────────────────────────────────────────────────────────────
+        document.getElementById('brief-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const btn = document.getElementById('btn-submit');
+            const errorEl = document.getElementById('submit-error');
+
+            // Validate: only check fields that are currently visible
+            const allRequired = [...document.querySelectorAll('[required]')];
+            const visibleRequired = allRequired.filter(el => el.offsetParent !== null);
+            const empty = visibleRequired.filter(el => !el.value.trim());
+
+            if (empty.length) {
+                empty.forEach(el => el.classList.add('error'));
+                empty.forEach(el => el.addEventListener('input', () => el.classList.remove('error'), { once: true }));
+                empty[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                empty[0].focus();
+                errorEl.textContent = 'Please fill in all fields before submitting.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            // Build answers object — only include visible sections
+            const answers = {
+                'Business name': document.getElementById('q1').value.trim(),
+                'What the business does & origin story': document.getElementById('q2').value.trim(),
+                'Services offered & not offered': document.getElementById('q3').value.trim(),
+                'Ideal customer': document.getElementById('q4').value.trim(),
+                'Problem solved & result': document.getElementById('q5').value.trim(),
+                'Success definition & practical details': document.getElementById('q14').value.trim(),
+                '3–5 year vision': document.getElementById('q20').value.trim(),
+                'Existing assets & inspiration': document.getElementById('q21').value.trim(),
+            };
+
+            if (showBrand) {
+                Object.assign(answers, {
+                    'Values & causes': document.getElementById('q6').value.trim(),
+                    'Core promise & differentiation': document.getElementById('q7').value.trim(),
+                    'Brand character': document.getElementById('q8').value.trim(),
+                    'Desired feelings': document.getElementById('q9').value.trim(),
+                    'Visual style & references': document.getElementById('q10').value.trim(),
+                    'Logo & branding usage': document.getElementById('q11').value.trim(),
+                    'Competitors & alternatives': document.getElementById('q15').value.trim(),
+                    'Tone of voice': document.getElementById('q16').value.trim(),
+                    'Pricing positioning': document.getElementById('q17').value.trim(),
+                });
+            }
+
+            if (showWeb) {
+                Object.assign(answers, {
+                    'Main website goal': document.getElementById('q12').value.trim(),
+                    'Pages & features required': document.getElementById('q13').value.trim(),
+                    'Customer experience style': document.getElementById('q18').value.trim(),
+                    'How customers find the business': document.getElementById('q19').value.trim(),
+                });
+            }
+
+            // Send
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            errorEl.style.display = 'none';
+
+            try {
+                const res = await fetch(`/brief/${token}/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(answers),
+                });
+
+                if (!res.ok) {
+                    const data = await res.json().catch(() => ({}));
+                    throw new Error(data.error || 'Submission failed. Please try again.');
+                }
+
+                // Success
+                document.getElementById('form-wrapper').style.display = 'none';
+                document.getElementById('thankyou').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } catch (err) {
+                btn.disabled = false;
+                btn.textContent = 'Submit Brief';
+                errorEl.textContent = err.message;
+                errorEl.style.display = 'block';
+            }
+        });
+    </script>
+
 </body>
 
 </html>
