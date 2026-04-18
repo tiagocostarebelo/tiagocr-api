@@ -15,7 +15,7 @@ db.exec(`
             token           TEXT UNIQUE NOT NULL,
             client_name     TEXT NOT NULL,
             client_email    TEXT NOT NULL,
-            project_type    TEXT NOT NULL CHECK(project_type IN ('brand', 'web', 'both', 'addon')),
+            project_type    TEXT NOT NULL CHECK(project_type IN ('brand', 'web', 'both')),
             prefill         TEXT NOT NULL DEFAULT '{}',
             created_at      INTEGER NOT NULL,
             expires_at      INTEGER NOT NULL,
