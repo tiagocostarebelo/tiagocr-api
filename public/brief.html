@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="/tcr_favicon.svg" />
     <title>TiagoCR | Client Brief</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -538,6 +539,26 @@
                         </div>
                     </div>
 
+                    <!-- Q22 — Budget -->
+                    <div class="question">
+                        <div class="question-meta">
+                            <span class="question-num">—</span>
+                            <label class="question-label" for="q22">What is your budget for this project?</label>
+                        </div>
+                        <p class="question-hint">This helps me understand what's realistic and recommend the right
+                            scope. There's no wrong answer — being honest here saves both of us time. If you're unsure,
+                            give me a range.</p>
+                        <details class="example">
+                            <summary>See an example answer</summary>
+                            <div class="example-body">"I have around £3,000–£4,000 to invest in this. I'm open to
+                                phasing the work if needed."</div>
+                        </details>
+                        <div class="field">
+                            <textarea id="q22" name="q22" placeholder="Your budget or budget range for this project"
+                                required></textarea>
+                        </div>
+                    </div>
+
                     <!-- Q14 — Success + practical details -->
                     <div class="question">
                         <div class="question-meta">
@@ -1008,6 +1029,7 @@
                 'Services offered & not offered': document.getElementById('q3').value.trim(),
                 'Ideal customer': document.getElementById('q4').value.trim(),
                 'Problem solved & result': document.getElementById('q5').value.trim(),
+                'Project budget': document.getElementById('q22').value.trim(),
                 'Success definition & practical details': document.getElementById('q14').value.trim(),
                 '3–5 year vision': document.getElementById('q20').value.trim(),
                 'Existing assets & inspiration': document.getElementById('q21').value.trim(),
